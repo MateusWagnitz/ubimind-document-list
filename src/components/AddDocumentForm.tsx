@@ -9,17 +9,18 @@ interface Document {
 }
 
 interface AddDocumentFormProps {
-  onAddDocument: (newDocument: Document) => void;
-  existingDocuments: Document[];
+  documents: Document[];
+  setDocuments: (updatedDocuments: Document[]) => void;
+  setFilteredDocuments: (updatedDocuments: Document[]) => void;
 }
 
-const AddDocumentForm: React.FC<AddDocumentFormProps> = ({ onAddDocument, existingDocuments }) => {
+const AddDocumentForm: React.FC<AddDocumentFormProps> = ({ documents, setDocuments, setFilteredDocuments }) => {
   const [newDocument, setNewDocument] = useState<Document>({
     Title: '',
     Content: '',
     Author: '',
     Date: '',
-    Status: 'Draft',
+    Status: '',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,20 +34,22 @@ const AddDocumentForm: React.FC<AddDocumentFormProps> = ({ onAddDocument, existi
       return;
     }
 
-    const isDuplicate = existingDocuments.some((doc) => doc.Title === newDocument.Title);
+    const isDuplicate = documents.some((doc) => doc.Title === newDocument.Title);
     if (isDuplicate) {
       alert('A document with this title already exists.');
       return;
     }
 
-    onAddDocument(newDocument);
+    const updatedDocuments = [...documents, newDocument];
+    setDocuments(updatedDocuments);
+    setFilteredDocuments(updatedDocuments); 
 
     setNewDocument({
       Title: '',
       Content: '',
       Author: '',
       Date: '',
-      Status: 'Draft',
+      Status: '',
     });
   };
 
