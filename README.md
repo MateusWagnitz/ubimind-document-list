@@ -39,7 +39,7 @@ The application is divided into several key components, each responsible for han
 
 The flow of data is controlled by React state, passed as props between components. The following diagram illustrates the relationships between the components and how they interact with the initial data from `documents.json`:
 
-![Component Diagram](./path-to-your-image.jpg) (./assets/Arch.jpg)
+![Component Diagram](./assets/Arch.jpg)
 
 - The **SearchDocuments** component fetches the initial data from `documents.json` and passes it to the other components for rendering, searching, editing, and deleting documents.
 - The **AddDocumentForm**, **EditDocumentForm**, and **DeleteDocument** components work together to maintain the list of documents, ensuring that updates, deletions, and additions are reflected dynamically.
